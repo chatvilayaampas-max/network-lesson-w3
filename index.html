@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>คลิกเรียนรู้... มหานคร Network! (โดย ส.อ.หญิง ฉัตรวิไล)</title>
+    <!-- Google Fonts: Itim & Fredoka -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Itim&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
@@ -35,7 +37,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-x: hidden; /* บล็อกไม่ให้หน้าจอหลักขยับซ้ายขวา */
+            overflow-x: hidden;
         }
 
         /* Header Title */
@@ -64,7 +66,6 @@
             margin-bottom: 12px;
         }
 
-        /* Instructor Badge Style */
         .instructor-badge {
             display: inline-flex;
             align-items: center;
@@ -157,6 +158,45 @@
             white-space: nowrap;
         }
 
+        /* ปุ่มเข้าหัวข้อสรุปขั้นสูง (ปรับปรุงให้แสดงผลพอดีจอ) */
+        .summary-trigger-box {
+            max-width: 1400px;
+            width: 100%;
+            background-color: #fff;
+            border: 4px solid var(--border-color);
+            border-radius: 28px;
+            padding: 0;
+            box-shadow: 8px 8px 0px var(--border-color);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .summary-trigger-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 10px 10px 0px var(--border-color);
+        }
+
+        .summary-trigger-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff3b0;
+            padding: 18px 20px;
+        }
+
+        .summary-trigger-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 85%;
+        }
+
+        .mascot-avatar { font-size: 40px; animation: floaty 2s ease-in-out infinite alternate; }
+        .summary-trigger-header h3 { font-size: 19px; color: #3d348b; line-height: 1.3; }
+        .summary-trigger-header p { font-size: 14px; color: #444; margin-top: 2px; }
+        .action-icon { font-size: 22px; color: #3d348b; padding-left: 10px; }
+
         /* Modal (Popup) Styling */
         .modal-overlay {
             position: fixed;
@@ -184,13 +224,13 @@
             border: 4px solid var(--border-color);
             border-radius: 28px;
             padding: 25px;
-            max-width: 600px;
+            max-width: 850px; /* ขยายให้กว้างขึ้นเล็กน้อยเพื่อรองรับตาราง */
             width: 92%;
             box-shadow: 8px 8px 0px var(--border-color);
             transform: scale(0.8);
             transition: transform 0.3s ease;
             position: relative;
-            max-height: 85vh;
+            max-height: 90vh;
             overflow-y: auto;
         }
 
@@ -200,21 +240,23 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 3px dashed var(--border-color);
-            padding-right: 25px;
+            padding-right: 30px;
+            color: #3d348b;
         }
 
         .modal-body {
-            font-size: 17px;
+            font-size: 16px;
             line-height: 1.5;
             color: #333;
         }
 
         .modal-body p { margin-bottom: 12px; }
+        .modal-body h4 { font-size: 18px; color: #b5179e; margin: 18px 0 8px 0; display: flex; align-items: center; gap: 8px; }
 
         .close-btn {
             position: absolute;
@@ -259,116 +301,38 @@
             padding: 8px 12px;
             border-radius: 12px;
             border: 2px solid var(--border-color);
-            font-size: 16px;
+            font-size: 15px;
         }
         .m-badge.good { background-color: #c4f1be; }
         .m-badge.bad { background-color: #ffadad; }
 
-        /* กล่องสรุปขั้นสูง */
-        .summary-box {
-            max-width: 1400px;
-            width: 100%;
-            background-color: #fff;
-            border: 4px solid var(--border-color);
-            border-radius: 28px;
-            padding: 0;
-            box-shadow: 8px 8px 0px var(--border-color);
-            overflow: hidden;
-        }
-
-        .summary-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #fff3b0;
-            padding: 15px 20px;
-            cursor: pointer;
-            user-select: none;
-            transition: background-color 0.2s ease;
-        }
-
-        .summary-header:hover {
-            background: #ffe97d;
-        }
-
-        .summary-header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            width: 90%;
-        }
-
-        .mascot-avatar { font-size: 40px; animation: floaty 2s ease-in-out infinite alternate; }
-        .summary-header h3 { font-size: 18px; color: #3d348b; line-height: 1.3; }
-        .summary-header p { font-size: 13px; color: #444; }
-
-        .toggle-icon {
-            font-size: 20px;
-            transition: transform 0.3s ease;
-            padding-left: 10px;
-        }
-
-        .summary-collapsible {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out;
-            background-color: #fff;
-        }
-
-        .summary-content {
-            padding: 20px 15px;
-            font-size: 16px;
-            line-height: 1.5;
-            border-top: 3px dashed var(--border-color);
-        }
-
-        .summary-box.active .summary-collapsible {
-            max-height: 2500px;
-            transition: max-height 0.5s ease-in;
-        }
-
-        .summary-box.active .toggle-icon {
-            transform: rotate(180deg);
-        }
-
-        .summary-content h4 {
-            font-size: 18px;
-            margin: 20px 0 10px 0;
-            color: #b5179e;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* 🛠️ แก้ไขจุดนี้: ควบคุมระบบเลื่อนตารางแบบไม่ให้ดึงหน้าจอหลักพัง */
+        /* ระบบควบคุมตารางในโมดอลไม่ให้ดันหน้าจอเสียรูป */
         .table-responsive {
             width: 100%;
-            overflow-x: auto; /* เปิดให้ใช้นิ้วปัดซ้ายขวาได้เฉพาะในกรอบนี้ */
-            display: block;  /* บังคับเป็นบล็อกเดี่ยว */
+            overflow-x: auto;
             -webkit-overflow-scrolling: touch;
-            margin-top: 15px;
+            margin-top: 10px;
             border: 3px solid var(--border-color);
             border-radius: 16px;
             box-shadow: 4px 4px 0px var(--border-color);
         }
 
-        /* Summary Table */
         .summary-table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 800px; /* ยืดความกว้างเนื้อหาตาราง เพื่อให้ข้อมูลในคอลัมน์ไม่อัดกันแน่นเกินไป */
+            min-width: 750px; /* ยืดความกว้างให้พอดีตัวข้อมูล ไม่ให้อัดตัวอักษรแน่นเกินไป */
         }
 
         .summary-table th, .summary-table td {
             border: 1.5px solid var(--border-color);
             padding: 12px;
-            font-size: 15px;
+            font-size: 14px;
             text-align: left;
             vertical-align: top;
-            white-space: normal; /* ยอมให้ข้อความขึ้นบรรทัดใหม่ในช่องตัวเองได้ */
+            white-space: normal;
         }
 
-        .summary-table th { background: #e2e8f0; font-weight: bold; }
+        .summary-table th { background: #e2e8f0; font-weight: bold; color: #2b2d42; }
         .summary-table tr:nth-child(even) { background: #fdfbf7; }
 
         @keyframes floaty {
@@ -379,12 +343,14 @@
         @media (max-width: 1100px) {
             .infographic-container { grid-template-columns: 1fr; gap: 25px; }
             .main-header h1 { font-size: 24px; }
-            .summary-header h3 { font-size: 16px; }
+            .summary-trigger-header h3 { font-size: 17px; }
+            .summary-trigger-header p { font-size: 13px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Header Title with Instructor Name -->
     <div class="main-header">
         <h1>📊 เจาะลึกความสัมพันธ์ "มหานคร Network"</h1>
         <p>สรุปภาพรวมขนาดพื้นที่ ผังโครงสร้างสายสัญญาณ และกฎเกณฑ์การรับส่งข้อมูลในภาพเดียว</p>
@@ -394,6 +360,7 @@
     </div>
 
     <div class="infographic-container">
+        <!-- ZONE 1 -->
         <div class="info-zone info-zone-1">
             <div class="zone-title">🗺️ 1. Network Scope</div>
             <div class="clickable-card" onclick="openModal('pan')">
@@ -414,6 +381,7 @@
             </div>
         </div>
 
+        <!-- ZONE 2 -->
         <div class="info-zone info-zone-2">
             <div class="zone-title">🗺️ 2. Network Topology</div>
             <div class="clickable-card" onclick="openModal('star')">
@@ -434,6 +402,7 @@
             </div>
         </div>
 
+        <!-- ZONE 3 -->
         <div class="info-zone info-zone-3">
             <div class="zone-title">🚦 3. Network Architecture</div>
             <div class="clickable-card" onclick="openModal('client')">
@@ -447,72 +416,21 @@
         </div>
     </div>
 
-    <div class="summary-box" id="summaryAccordion">
-        <div class="summary-header" onclick="toggleSummary()">
-            <div class="summary-header-left">
+    <!-- ปุ่มกดเปิดกล่องสรุปผลขั้นสูงภายนอกตาราง (แก้ปัญหาหน้าจอพัง) -->
+    <div class="summary-trigger-box" onclick="openModal('advancedSummary')">
+        <div class="summary-trigger-header">
+            <div class="summary-trigger-left">
                 <span class="mascot-avatar">🐱🎓</span>
                 <div>
                     <h3>💡 บทสรุปขั้นสูง: ทั้ง 3 หัวข้อทำงานร่วมกันอย่างไร?</h3>
-                    <p>คลิกเพื่อเปิดอ่านรายละเอียดและตารางเปรียบเทียบสถานการณ์จริง 👇</p>
+                    <p>คลิกเพื่อเปิดดูหน้าต่างวิเคราะห์และตารางเปรียบเทียบสถานการณ์จริงในจอเดียวแบบไม่ตกขอบครับ ✨</p>
                 </div>
             </div>
-            <div class="toggle-icon"><i class="fa-solid fa-chevron-down"></i></div>
-        </div>
-        
-        <div class="summary-collapsible">
-            <div class="summary-content">
-                <p>คอมพิวเตอร์และอุปกรณ์จะไม่สามารถสื่อสารกันได้เลย หากขาดองค์ประกอบใดองค์ประกอบหนึ่งไป เพราะทั้งสามหัวข้อนี้ไม่ได้ทำหน้าที่แยกกัน แต่เป็น <strong>"เลเยอร์หรือมิติในการทำงานร่วมกัน"</strong> ในเวลาเดียวกัน โดยมีกลไกความสัมพันธ์ดังนี้ครับ:</p>
-                
-                <h4><i class="fa-solid fa-gears"></i> กลไกการประสานงานแบบ 3 มิติ</h4>
-                <ol style="margin-left: 20px; display: flex; flex-direction: column; gap: 8px;">
-                    <li><strong>มิติที่ 1 - ขอบเขตพื้นที่ (Scope):</strong> กำหนดระยะทางว่าเครือข่ายนี้จะเดินทางไปไกลแค่ไหน ซึ่งจะส่งผลต่อการเลือกชนิดของสายสัญญาณ (เช่น สายทองแดง LAN หรือ สายไฟเบอร์ออปติก)</li>
-                    <li><strong>มิติที่ 2 - ผังทางกายภาพ (Topology):</strong> กำหนดว่าจะทำการจัดวางเครื่องคอมพิวเตอร์และลากสายสัญญาณสัญญาณเชื่อมหากันใน "ท่าไหน" เพื่อให้เกิดความประหยัด คุค่า หรือปลอดภัยสูงสุดตามขนาดพื้นที่ในมิติที่ 1</li>
-                    <li><strong>มิติที่ 3 - กฎการรับส่ง (Architecture):</strong> เป็นซอฟต์แวร์หรือกติกาบนระบบปฏิบัติการที่กำหนดว่า เมื่อสายสัญญาณเชื่อมต่อเสร็จแล้ว คอมพิวเตอร์เครื่องไหนจะมีสิทธิ์คุมข้อมูล (เป็นเจ้านายให้บริการ) หรือเครื่องไหนจะเท่ากัน</li>
-                </ol>
-
-                <h4><i class="fa-solid fa-lightbulb"></i> ตัวอย่างสถานการณ์จริงของการทำงานร่วมกัน</h4>
-                <p style="font-size: 13px; color: #e63946; margin-top: 5px; font-weight: bold;"><i class="fa-solid fa-hand-pointer"></i> *บนมือถือ สามารถใช้นิ้วปัดตารางไปทางซ้าย-ขวา เพื่อดูข้อมูลในตารางทั้งหมดได้ครับ</p>
-                
-                <div class="table-responsive">
-                    <table class="summary-table">
-                        <thead>
-                            <tr>
-                                <th style="width: 20%;">สถานการณ์ในชีวิตจริง</th>
-                                <th style="background: var(--zone-blue); width: 15%;">1. พื้นที่ (Scope)</th>
-                                <th style="background: var(--zone-yellow); width: 15%;">2. ผังสาย (Topology)</th>
-                                <th style="background: var(--zone-pink); width: 15%;">3. กฎเกณฑ์ (Architecture)</th>
-                                <th style="width: 35%;">คำอธิบายรูปแบบการทำงาน</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>🏪 ร้านอินเทอร์เน็ตคาเฟ่ / ห้องเกมส์</strong></td>
-                                <td><strong>LAN</strong> (ห้องเดียว)</td>
-                                <td><strong>Star</strong> (ใช้ Switch คุมตรงกลาง)</td>
-                                <td><strong>Client-Server</strong> (ดึงไฟล์เกมจากเครื่องแม่ข่าย)</td>
-                                <td>คอมพิวเตอร์เล่นเกมทุกตัวลากสายแลนส่วนตัวมาเสียบเข้าสวิตช์กลางในห้อง (Star) เพื่อให้ส่งข้อมูลเร็ว และพนักงานสามารถคุมเปิด-ปิดเครื่องทั้งหมดได้จากเครื่องแม่เพียงเครื่องเดียว (Client-Server)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>📱 เพื่อนสองคนแชร์รูปบนรถไฟฟ้า</strong></td>
-                                <td><strong>PAN</strong> (ระยะใกล้ตัว)</td>
-                                <td><strong>Mesh / Point-to-Point</strong> (ต่อตรง)</td>
-                                <td><strong>Peer-to-Peer</strong> (แชร์ข้อมูลสิทธิ์เท่ากัน)</td>
-                                <td>เปิดใช้งาน AirDrop หรือ Nearby Share มือถือทั้งสองจะใช้บลูทูธและ Wi-Fi ค้นหากันในระยะใกล้ (PAN) ยิงคลื่นตรงหาคู่กรณีไร้ตัวกลาง (Mesh) เพื่อส่งไฟล์รูปโดยไม่มีใครควบคุมใคร (P2P)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>🌍 การทำธุรกรรมถอนเงินตู้ ATM</strong></td>
-                                <td><strong>WAN</strong> (เครือข่ายทั่วโลก)</td>
-                                <td><strong>Mesh</strong> (ใยแมงมุม กันระบบล่ม)</td>
-                                <td><strong>Client-Server</strong> (ตู้ ATM วิ่งเข้าฐานข้อมูลหลัก)</td>
-                                <td>ตู้ ATM ทั่วโลกเชื่อมโยงกันข้ามประเทศ (WAN) สายสัญญาณเชื่อมกันเป็นใยแมงมุม (Mesh) เพื่อให้ตู้ ATM (Client) สามารถติดต่อคุ้มระบบ Server สำนักงานใหญ่ตรวจสอบยอดเงินได้ตลอดเวลาแม้สายบางเส้นจะขาด</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <div class="action-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
         </div>
     </div>
 
+    <!-- The Interactive Pop-up Modal -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
         <div class="modal-box" onclick="event.stopPropagation()">
             <button class="close-btn" onclick="closeModal()">X</button>
@@ -522,15 +440,11 @@
         </div>
     </div>
 
+    <!-- JavaScript Data and Controller -->
     <script>
-        function toggleSummary() {
-            const accordion = document.getElementById('summaryAccordion');
-            accordion.classList.toggle('active');
-        }
-
         const diagrams = {
             star: `<div class="diagram-container">
-                    <svg width="150" height="150" viewBox="0 0 200 200">
+                    <svg width="140" height="140" viewBox="0 0 200 200">
                         <line x1="100" y1="100" x2="30" y2="40" stroke="#2b2d42" stroke-width="4" />
                         <line x1="100" y1="100" x2="170" y2="40" stroke="#2b2d42" stroke-width="4" />
                         <line x1="100" y1="100" x2="30" y2="160" stroke="#2b2d42" stroke-width="4" />
@@ -544,7 +458,7 @@
                     </svg>
                    </div>`,
             mesh: `<div class="diagram-container">
-                    <svg width="150" height="150" viewBox="0 0 200 200">
+                    <svg width="140" height="140" viewBox="0 0 200 200">
                         <polygon points="100,20 180,80 150,170 50,170 20,80" fill="none" stroke="#2b2d42" stroke-width="4" />
                         <line x1="100" y1="20" x2="150" y2="170" stroke="#2b2d42" stroke-width="3" />
                         <line x1="100" y1="20" x2="50" y2="170" stroke="#2b2d42" stroke-width="3" />
@@ -559,7 +473,7 @@
                     </svg>
                    </div>`,
             bus: `<div class="diagram-container">
-                    <svg width="200" height="110" viewBox="0 0 220 120">
+                    <svg width="190" height="100" viewBox="0 0 220 120">
                         <line x1="20" y1="60" x2="200" y2="60" stroke="#2b2d42" stroke-width="6" />
                         <rect x="15" y="50" width="5" height="20" fill="#e63946" stroke="#2b2d42" stroke-width="2"/>
                         <rect x="200" y="50" width="5" height="20" fill="#e63946" stroke="#2b2d42" stroke-width="2"/>
@@ -572,7 +486,7 @@
                     </svg>
                    </div>`,
             ring: `<div class="diagram-container">
-                    <svg width="150" height="150" viewBox="0 0 200 200">
+                    <svg width="140" height="140" viewBox="0 0 200 200">
                         <circle cx="100" cy="100" r="65" fill="none" stroke="#2b2d42" stroke-width="5" stroke-dasharray="6,6"/>
                         <circle cx="100" cy="35" r="15" fill="#ffd166" stroke="#2b2d42" stroke-width="4" />
                         <circle cx="165" cy="100" r="15" fill="#ffd166" stroke="#2b2d42" stroke-width="4" />
@@ -652,6 +566,51 @@
                 body: `<p><strong>คอนเซปต์:</strong> ระบบเท่าเทียมไร้ศูนย์กลาง (Decentralized) ทุกเครื่องในเครือข่ายมีสิทธิ์และศักดิ์ศรีเสมอกัน สามารถทำหน้าที่เป็นทั้งผู้ให้ (Server) และผู้รับ (Client) พร้อมกันได้</p>
                        <p>🍕 <strong>เปรียบเทียบ:</strong> เหมือนปาร์ตี้แชร์ขนมกันกิน ทุกคนพกขนมมาเองแล้วแลกเปลี่ยนกันตรงๆ</p>
                        <p>🎮 <strong>ตัวอย่าง:</strong> การส่งไฟล์ AirDrop ใกล้ๆ, โหลดบิท (BitTorrent), เครือข่ายระบบ Blockchain</p>`
+            },
+            // หัวข้อสรุปแบบโมดอลใหม่แกะกล่องตามที่คุณต้องการ
+            advancedSummary: {
+                title: "💡 สรุปความเชื่อมโยงของทั้ง 3 มิติเครือข่าย",
+                body: `<p>อุปกรณ์เทคโนโลยีจะไม่สามารถสื่อสารในเครือข่ายได้เลยหากขาดหัวข้อใดหัวข้อหนึ่งไป เพราะระบบเน็ตเวิร์กคือการทำงานร่วมกันของ <strong>"พื้นที่ผืนดิน ผังการลากสาย และกฎควบคุมระบบ"</strong> ไปพร้อมๆ กันครับ</p>
+                       
+                       <h4><i class="fa-solid fa-square-poll-horizontal"></i> ตารางวิเคราะห์สถานการณ์จำลองในชีวิตจริง</h4>
+                       <p style="font-size: 13px; color: #e63946; font-weight: bold; margin-bottom: 8px;"><i class="fa-solid fa-hand-pointer"></i> *บนมือถือ สามารถใช้นิ้วปัดเลื่อนตารางไปทางซ้าย-ขวา เพื่อดูตารางแบบเต็มๆ ได้เลยครับ</p>
+                       
+                       <div class="table-responsive">
+                            <table class="summary-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 22%;">สถานการณ์จริง</th>
+                                        <th style="background: var(--zone-blue); width: 16%;">1. Scope</th>
+                                        <th style="background: var(--zone-yellow); width: 16%;">2. Topology</th>
+                                        <th style="background: var(--zone-pink); width: 16%;">3. Architecture</th>
+                                        <th style="width: 30%;">กลไกการทำงานร่วมกัน</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>🏪 ห้องปฏิบัติการคอมพิวเตอร์ / ร้านเน็ต</strong></td>
+                                        <td><strong>LAN</strong><br>(พื้นที่ปิดระดับอาคาร)</td>
+                                        <td><strong>Star</strong><br>(ลากสายแลนรวมที่สวิตช์กลาง)</td>
+                                        <td><strong>Client-Server</strong><br>(ดาวน์โหลดข้อมูลผ่านเครื่องแม่ข่าย)</td>
+                                        <td>คอมพิวเตอร์ทุกเครื่องต่อสายพุ่งเข้าอุปกรณ์กลางแยกจากกัน (Star) เพื่อให้สัญญาณเสถียรที่สุดในห้อง (LAN) และพนักงานสามารถคุมเปิด-ปิดระบบหรืออัปเดตไฟล์เกมจากศูนย์กลางได้ (Client-Server)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>📱 แชร์ภาพถ่ายระหว่างเพื่อนบนรถไฟฟ้า</strong></td>
+                                        <td><strong>PAN</strong><br>(ระยะสั้นรอบตัวบุคคล)</td>
+                                        <td><strong>Mesh / Point-to-Point</strong><br>(ยิงสัญญาณตรงหาคู่)</td>
+                                        <td><strong>Peer-to-Peer</strong><br>(ทั้งสองเครื่องสิทธิ์เท่ากัน)</td>
+                                        <td>ใช้บลูทูธและไวไฟค้นหากันในระยะประชิดตัว (PAN) เพื่อยิงคลื่นตรงจากโทรศัพท์เครื่องหนึ่งไปยังอีกเครื่องหนึ่ง (Mesh) โดยส่งรูปภาพหากันได้ทันทีโดยไม่ต้องรออนุมัติจากเครื่องแม่ข่ายใดๆ (P2P)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>🏪 การทำธุรกรรมที่ตู้กดเงิน ATM ทั่วประเทศ</strong></td>
+                                        <td><strong>WAN</strong><br>(ระยะไกลระดับประเทศ)</td>
+                                        <td><strong>Mesh</strong><br>(ใยแมงมุมป้องกันระบบล่ม)</td>
+                                        <td><strong>Client-Server</strong><br>(เข้าข้อมูลศูนย์กลางธนาคาร)</td>
+                                        <td>ตู้ ATM ติดตั้งกระจายอยู่ทุกจังหวัดข้ามภาค (WAN) เดินสายระบบเครือข่ายโยงหากันเป็นเครือข่ายใยแมงมุม (Mesh) เพื่อให้ตู้เอทีเอ็ม (Client) สามารถเช็กยอดเงินวิ่งเข้าหาข้อมูลส่วนกลางของธนาคารใหญ่ได้แม้สายบางเส้นขาด</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                       </div>`
             }
         };
 
